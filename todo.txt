@@ -1,0 +1,21 @@
+TASKS TO DO
+
+USER END
+
+-> Mark if waste or not
+-> Integrate Stripe to Pay Water Bill
+-> Stripe to Recharge Wallet
+-> Notification View
+-> Newsletter System
+
+
+WASTE TEAM END
+
+-> View Houses For Waste Collection
+-> Mark as Collected
+
+
+WATER TEAM
+
+-> View Houses and search based on Ward Number/ other params
+-> Mark Water Reading
