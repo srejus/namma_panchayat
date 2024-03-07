@@ -19,3 +19,24 @@ WATER TEAM
 
 -> View Houses and search based on Ward Number/ other params
 -> Mark Water Reading
+
+
+
+
+Todo
+
+-> Get waterbill for the month from the table and show the amount directly in home and show direct option to pay
+-> payment gateway to recharge Wallet
+-> notification System
+
+
+Waste Collector
+
+-> Get the houses with waste and option to mark as Collected
+-> send noti as Collected
+
+Waterbill 
+
+-> show all houses
+-> enter usage and auto calculate bills and create the bills
+-> send noti for bill creation

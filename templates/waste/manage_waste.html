@@ -133,8 +133,17 @@
 				</tr>
 				{% for waste in collected_waste %}
 				<tr>
+					{% if waste.collected_by %}
 					<td>{{waste.collected_by.full_name}}</td>
+					{% else %}
+					<td>---</td>
+					{% endif %}
+					
+					{% if waste.collected_at %}
 					<td>{{waste.collected_at}}</td>
+					{% else %}
+					<td>---</td>
+					{% endif %}
 					<td>{{waste.no_of_sacks}}</td>
 					{% if waste.is_paid %}
 					<td style="color: green;font-weight: 700;">PAID</td>

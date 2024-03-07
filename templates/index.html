@@ -99,11 +99,19 @@
 							</div>
 							<div class="col-lg-2 col-12">
 								<div class="get-quote">
-									{% if user.is_authenticated %}
-									<a href="/accounts/logout" class="btn">Logout Now</a>
-									{% else %}
-									<a href="/accounts/login/" class="btn">Login Now</a>
-									{% endif %}
+									<div class="row">
+										<div style="display: flex;">
+
+											{% if user.is_authenticated %}
+											<a href="/accounts/logout" class="btn">Logout Now</a>
+											{% if not has_waste %}
+											<a href="/mark-waste-availability" class="btn" style="margin-left: 15px;">I Have Waste</a>
+											{% endif %}
+											{% else %}
+											<a href="/accounts/login/" class="btn">Login Now</a>
+											{% endif %}
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -201,7 +209,7 @@
 									<div class="single-content">
 										<h4>Wallet</h4>
 										<p>
-											Available Balance : <button class="mbtn">100.00 Rs</button>
+											Available Balance : <button class="mbtn">{{wallet}} Rs</button>
 										</p>
 										<a href="#">Recharge Now<i class="fa fa-long-arrow-right"></i></a>
 									</div>

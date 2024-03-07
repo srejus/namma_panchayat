@@ -11,3 +11,5 @@ class Account(models.Model):
     place = models.CharField(max_length=100,null=True,blank=True)
     phone = models.CharField(max_length=15,null=True,blank=True)
     ward_no = models.IntegerField(null=True,blank=True)
+
+    wallet = models.FloatField(default=0.0)
