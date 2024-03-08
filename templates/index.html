@@ -193,8 +193,16 @@
 									</div>
 									<div class="single-content">
 										<h4>Water Bills</h4>
+										<!-- <p>Now we have the option to Pay your water bills right from your fingertips</p> -->
+										{% if water_bill.bill_amount %}
+										<p>
+											Water Bill : <button class="mbtn">{{water_bill.bill_amount}} Rs</button>
+										</p>
+										<a href="/water/pay">Pay Now<i class="fa fa-long-arrow-right"></i></a>
+										{% else %}
 										<p>Now we have the option to Pay your water bills right from your fingertips</p>
-										<a href="#">DETAILS<i class="fa fa-long-arrow-right"></i></a>
+										<a href="#">Check Back Later<i class="fa fa-long-arrow-right"></i></a>
+										{% endif %}
 									</div>
 								</div>
 							</div>
@@ -221,6 +229,13 @@
 			</div>
 		</section>
 		<!--/End Start schedule Area -->
+
+		{% if err %}
+		<script>
+			alert('{{err}}');
+			window.location.href='/';
+		</script>
+		{% endif %}
 
 		<!-- Start Feautes -->
 		<section class="Feautes section">

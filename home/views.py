@@ -5,6 +5,7 @@ from django.utils import timezone
 from datetime import datetime
 
 from waste.models import WasteCollection
+from water.models import WaterBills
 from accounts.models import Account
 
 
@@ -25,7 +26,17 @@ class IndexView(View):
         else:
             wallet = "0.0"
             has_waste = False
-        return render(request,'index.html',{'has_waste':has_waste,"wallet":wallet})
+
+        # water bill fetching section
+        current_datetime = timezone.now()
+
+        water_bill = WaterBills.objects.filter(
+            bill_created_at__year=current_datetime.year,
+            bill_created_at__month=current_datetime.month,user__user=request.user,is_paid=False
+        ).last()
+
+        err = request.GET.get("err")
+        return render(request,'index.html',{'has_waste':has_waste,"wallet":wallet,'water_bill':water_bill,'err':err})
 
 
 class MarkWasteView(View):
