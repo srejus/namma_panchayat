@@ -3,7 +3,13 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Account(models.Model):
+    USER_CHOCIES = (
+        ('USER','USER'),
+        ('WATER_BILL_COLLECTOR','WATER_BILL_COLLECTOR'),
+        ('WASTE_COLLECTOR','WASTE_COLLECTOR'),
+    )
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='user')
+    user_type = models.CharField(max_length=20,default='USER',choices=USER_CHOCIES)
     full_name = models.CharField(max_length=100)
     house_name = models.CharField(max_length=100)
     house_number = models.IntegerField(null=True,blank=True)

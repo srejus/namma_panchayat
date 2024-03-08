@@ -22,7 +22,13 @@ class IndexView(View):
             # Query objects created in the current month
             has_waste = WasteCollection.objects.filter(
                 collected_from__user=request.user,created_at__range=(current_month_start, current_month_end)).exists()
-            wallet = Account.objects.get(user=request.user).wallet
+            acc = Account.objects.get(user=request.user)
+            if acc.user_type == 'WASTE_COLLECTOR':
+                return redirect("/waste/")
+            elif acc.user_type == 'WATER_BILL_COLLECTOR':
+                return redirect("/water/")
+            
+            wallet = acc.wallet
         else:
             wallet = "0.0"
             has_waste = False

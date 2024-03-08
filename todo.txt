@@ -25,14 +25,14 @@ WATER TEAM
 
 Todo
 
--> Get waterbill for the month from the table and show the amount directly in home and show direct option to pay
+-> Get waterbill for the month from the table and show the amount directly in home and show direct option to pay - DONE
 -> payment gateway to recharge Wallet
 -> notification System
 
 
 Waste Collector
 
--> Get the houses with waste and option to mark as Collected
+-> Get the houses with waste and option to mark as Collected - DONE
 -> send noti as Collected
 
 Waterbill 
