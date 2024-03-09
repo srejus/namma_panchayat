@@ -37,6 +37,6 @@ Waste Collector
 
 Waterbill 
 
--> show all houses
--> enter usage and auto calculate bills and create the bills
+-> show all houses - DONE
+-> enter usage and auto calculate bills and create the bills - DONE
 -> send noti for bill creation
