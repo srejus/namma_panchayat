@@ -42,7 +42,6 @@ class IndexView(View):
             water_bill = None
 
       
-
         err = request.GET.get("err")
         return render(request,'index.html',{'has_waste':has_waste,"wallet":wallet,'water_bill':water_bill,'err':err})
 

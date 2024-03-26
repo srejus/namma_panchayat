@@ -24,6 +24,9 @@ class PayBillView(View):
             bill_created_at__year=current_datetime.year,
             bill_created_at__month=current_datetime.month,user__user=request.user,is_paid=False
         ).last()
+        if not water_bill:
+            msg = "No water bill found!"
+            return redirect(f"/?err={msg}")
         acc = Account.objects.get(user=request.user)
         if acc.wallet >= water_bill.bill_amount:
             water_bill.is_paid = True
