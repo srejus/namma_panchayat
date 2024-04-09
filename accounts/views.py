@@ -10,18 +10,44 @@ from .models import *
 class LoginView(View):
     def get(self,request):
         err = request.GET.get("err")
-        return render(request,'login.html',{'err':err})
+        type_ = request.GET.get("type","user")
+        if type_ == 'user':
+            login_text = "Login as User"
+        elif type_ == 'wc':
+            login_text = "Login as Waste Collector"
+        elif type_ == 'wtr':
+            login_text = "Login as Water Bill Collector"
+
+        return render(request,'login.html',{'err':err,'login_text':login_text})
 
     def post(self,request):
         username = request.POST.get("username")
         password = request.POST.get("password")
+
+        type_ = request.GET.get("type","user")
+
         
         user = authenticate(request, username=username, password=password)
         if user is not None:
+            acc = Account.objects.get(user=user)
+            if type_ == 'user' and acc.user_type != 'USER':
+                err = "Invalid USER credentails!"
+                return redirect(f"/accounts/login/?err={err}")
+            
+            if type_ == 'wc' and acc.user_type != 'WASTE_COLLECTOR':
+                err = "Invalid WASTE_COLLECTOR credentails!"
+                return redirect(f"/accounts/login/?err={err}")
+            
+        
+            if type_ == 'wtr' and acc.user_type != 'WATER_BILL_COLLECTOR':
+                err = "Invalid USER credentails!"
+                return redirect(f"/accounts/login/?err={err}")
+            
+            
             login(request, user)
             return redirect("/")
         err = "Invalid credentails!"
-        return redirect(f"/account/login/?err={err}")
+        return redirect(f"/accounts/login/?err={err}")
     
 
 class SignupView(View):

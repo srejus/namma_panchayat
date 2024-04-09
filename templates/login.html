@@ -134,7 +134,7 @@
 
 		<div class="main">
 			<div class="form-div">
-				<h3 style="text-align: center;">Login to Your Account</h3>
+				<h3 style="text-align: center;">{{login_text}}</h3>
 				<br>
 				<form action="" method="POST" class="form">
 					{% csrf_token %}
@@ -142,13 +142,22 @@
 					<input type="password" placeholder="Enter Password...*" name="password" class="form-control" required><br>
 					<button class="btn btn-primary form-control" style="margin-bottom: 15px;">Login</button>
 					<br>
-					<a href="/accounts/signup" style="color: dodgerblue;">Don't have an Account? Create Now</a>
+					<a href="/accounts/signup" style="color: dodgerblue;">Don't have an Account? Create Now</a><br><br>
+					<a href="/accounts/login/?type=wc" style="color: dodgerblue;">Login as Waste Collector</a><br>
+					<a href="/accounts/login/?type=wtr" style="color: dodgerblue;">Login as Water Bill Collector</a><br>
 				</form>
 			</div>
 			
 		</div>
 
 		<br><br><br>
+
+		{% if err %}
+		<script>
+			alert('{{err}}');
+			window.location.href = '/accounts/login/';
+		</script>
+		{% endif %}
 
 		
 		<!-- Footer Area -->
