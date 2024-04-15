@@ -11,7 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		
 		<!-- Title -->
-        <title>Namma Panchayat</title>
+        <title>Namma Panchayat | Water</title>
 		
 		<!-- Favicon -->
         <link rel="icon" href="img/favicon.png">
@@ -43,6 +43,8 @@
         <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+
+		<link rel="stylesheet" href="{% static 'css/main.css' %}">
 		
     </head>
     <body>
@@ -74,7 +76,7 @@
 						<div class="row">
 							<div class="col-lg-3 col-md-3 col-12">
 								<!-- Start Logo -->
-								<div class="logo" onclick="window.location.href='/'">
+								<div class="logo" onclick="window.location.href='/adminuser/'">
 									<h6
 									style="font-size: 23px;margin-top: 5px;font-weight: 800;"
 									><span style="color: dodgerblue;">Namma</span> Panchayat</h6>
@@ -114,10 +116,40 @@
 		</header>
 		<!-- End Header Area -->
 		
+		<br><br><br>
 
-		<div class="main">
-			
+		<h2 style="text-align: center;">Water Bills</h2><br><br>
+
+		<div class="main" style="overflow-x: scroll; scrollbar-width: none; 
+		-webkit-scrollbar {
+			display: none;
+		}">
+			<table style="color: black;">
+				<tr>
+					<th>Bill Created By</th>
+					<th>Bill Amount</th>
+					<th>Bill Created At</th>
+					<th>Usage(Ltr)</th>
+					<th>Payment Status</th>
+				</tr>
+				{% for bill in water_bills %}
+				<tr>
+					<td>{{bill.bill_created_by.full_name}}</td>
+					<td>{{bill.bill_amount}} Rs</td>
+					<td>{{bill.bill_created_at}}</td>
+					<td>{{bill.usage}} Ltr</td>
+					{% if bill.is_paid %}
+					<td style="color: green;font-weight: 700;">PAID</td>
+					{% else %}
+					<td style="color: green;font-weight: 700;">UNPAID</td>
+					{% endif %}
+					
+				</tr>
+				{% endfor %}
+			</table>
 		</div>
+
+		<br><br><br>
 
 		
 		<!-- Footer Area -->

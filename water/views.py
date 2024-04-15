@@ -6,6 +6,7 @@ from django.utils import timezone
 
 from .models import WaterBills
 from accounts.models import Account
+from namma_panchayat.utils import send_mail
 
 
 # Create your views here.
@@ -32,9 +33,18 @@ class PayBillView(View):
             water_bill.is_paid = True
             acc.wallet -= water_bill.bill_amount
             acc.save()
+
+            # send noti if balance is low
+            if acc.wallet <= 50:
+                subject = "Wallet balance Low!"
+                msg = f"Hello {acc.full_name},\n\nYour wallet balance is low. Please recharge immediately\n\nThanks"
+
+                if acc.user.email:
+                    send_mail(acc.user.email,subject,msg)
+
             water_bill.save()
             err = "Water Bill Payment Successfull!"
-            # send noti to the user about the bill paid
+  
         else:
             err = "Insufficient Wallet Balance to Pay the Bill!"
         

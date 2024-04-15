@@ -11,7 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		
 		<!-- Title -->
-        <title>Namma Panchayat</title>
+        <title>Namma Panchayat | Admin Dashboard</title>
 		
 		<!-- Favicon -->
         <link rel="icon" href="img/favicon.png">
@@ -43,6 +43,8 @@
         <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+
+		<link rel="stylesheet" href="{% static 'css/main.css' %}">
 		
     </head>
     <body>
@@ -74,7 +76,7 @@
 						<div class="row">
 							<div class="col-lg-3 col-md-3 col-12">
 								<!-- Start Logo -->
-								<div class="logo" onclick="window.location.href='/'">
+								<div class="logo" onclick="window.location.href='/adminuser/'">
 									<h6
 									style="font-size: 23px;margin-top: 5px;font-weight: 800;"
 									><span style="color: dodgerblue;">Namma</span> Panchayat</h6>
@@ -114,10 +116,47 @@
 		</header>
 		<!-- End Header Area -->
 		
+		<br><br><br>
 
-		<div class="main">
-			
+		<style>
+			.glass-card {
+				background-color: rgba(255, 255, 255, 0.5); /* Change opacity to control the glass effect */
+				backdrop-filter: blur(10px); /* Adjust the blur for desired effect */
+				border: none; /* Remove border */
+				box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+			}
+		</style>
+
+		<h2 style="text-align: center;">Admin Dashboard</h2><br><br>
+
+		<div class="main" style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content: center;">
+
+			 <div class="card glass-card p-3" style="margin: 10px;" onclick="window.location.href='/adminuser/water'">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Water Bills</h5>
+                    <p class="card-text">View all water bills and their Status from here</p>
+                </div>
+            </div>
+
+
+			<div class="card glass-card p-3" style="margin: 10px;" onclick="window.location.href='/adminuser/waste'">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Waste Bills</h5>
+                    <p class="card-text">View all waste bills and their Status from here</p>
+                </div>
+            </div>
+
+
+			<div class="card glass-card p-3" style="margin: 10px;" onclick="window.location.href='/adminuser/users'">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Users</h5>
+                    <p class="card-text">View all users and their Status from here</p>
+                </div>
+            </div>
+
 		</div>
+
+		<br><br><br>
 
 		
 		<!-- Footer Area -->

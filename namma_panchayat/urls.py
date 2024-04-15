@@ -7,4 +7,5 @@ urlpatterns = [
     path('',include('home.urls')),
     path('waste/',include('waste.urls')),
     path('water/',include('water.urls')),
+    path('adminuser/',include('adminuser.urls')),
 ]

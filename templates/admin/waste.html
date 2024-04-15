@@ -11,7 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		
 		<!-- Title -->
-        <title>Namma Panchayat</title>
+        <title>Namma Panchayat | Manage Waste</title>
 		
 		<!-- Favicon -->
         <link rel="icon" href="img/favicon.png">
@@ -43,6 +43,8 @@
         <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+
+		<link rel="stylesheet" href="{% static 'css/main.css' %}">
 		
     </head>
     <body>
@@ -74,7 +76,7 @@
 						<div class="row">
 							<div class="col-lg-3 col-md-3 col-12">
 								<!-- Start Logo -->
-								<div class="logo" onclick="window.location.href='/'">
+								<div class="logo" onclick="window.location.href='/adminuser/'">
 									<h6
 									style="font-size: 23px;margin-top: 5px;font-weight: 800;"
 									><span style="color: dodgerblue;">Namma</span> Panchayat</h6>
@@ -102,7 +104,7 @@
 									{% if user.is_authenticated %}
 									<a href="/accounts/logout" class="btn">Logout Now</a>
 									{% else %}
-									<a href="/accounts/login/" class="btn">Login Now</a>
+									<a href="/accounts/login" class="btn">Login Now</a>
 									{% endif %}
 								</div>
 							</div>
@@ -114,10 +116,47 @@
 		</header>
 		<!-- End Header Area -->
 		
+		<br><br><br>
 
-		<div class="main">
-			
+		<h2 style="text-align: center;">Waste Collection History</h2><br><br>
+
+		<div class="main" style="overflow-x: scroll; scrollbar-width: none; 
+		-webkit-scrollbar {
+			display: none;
+		}">
+			<table style="color: black;">
+				<tr>
+					<th>Collected By</th>
+					<th>Collected At</th>
+					<th>No of Sacks</th>
+					<th>Is Paid</th>
+				</tr>
+				{% for waste in collected_waste %}
+				<tr>
+					{% if waste.collected_by %}
+					<td>{{waste.collected_by.full_name}}</td>
+					{% else %}
+					<td>---</td>
+					{% endif %}
+					
+					{% if waste.collected_at %}
+					<td>{{waste.collected_at}}</td>
+					{% else %}
+					<td>---</td>
+					{% endif %}
+					<td>{{waste.no_of_sacks}}</td>
+					{% if waste.is_paid %}
+					<td style="color: green;font-weight: 700;">PAID</td>
+					{% else %}
+					<td style="color: red;font-weight: 700;">NOT PAID</td>
+					{% endif %}
+					
+				</tr>
+				{% endfor %}
+			</table>
 		</div>
+
+		<br><br><br>
 
 		
 		<!-- Footer Area -->

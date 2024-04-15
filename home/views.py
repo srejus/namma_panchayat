@@ -8,6 +8,10 @@ from waste.models import WasteCollection
 from water.models import WaterBills
 from accounts.models import Account
 
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+from namma_panchayat.utils import *
 
 # Create your views here.
 class IndexView(View):
@@ -53,8 +57,35 @@ class MarkWasteView(View):
             is_paid = True
             acc.wallet -= 50
             acc.save()
+            
         else:
             is_paid = False
+        
+        if acc.wallet <= 50:
+            subject = "Wallet balance Low!"
+            msg = f"Hello {acc.full_name},\n\nYour wallet balance is low. Please recharge immediately\n\nThanks"
+
+            if acc.user.email:
+                send_mail(acc.user.email,subject,msg)
 
         WasteCollection.objects.create(collected_from=acc,no_of_sacks=1,is_paid=is_paid) # get this no of sacks and populate this field
         return redirect("/")
+    
+
+@method_decorator(login_required,name='dispatch')
+class RechargeView(View):
+    def get(self,request):
+        return render(request,'recharge.html')
+    
+    def post(self,request):
+        amount = request.POST.get("amount")
+        pay_url = create_stripe_payment_link(amount)
+
+        if pay_url:
+            acc = Account.objects.get(user=request.user)
+            acc.wallet += float(amount)
+            acc.save()
+            return redirect(pay_url)
+        
+        err = "Failed to create payment url!"
+        return redirect(f"/?err={err}")

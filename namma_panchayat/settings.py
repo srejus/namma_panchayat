@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'home',
     'waste',
     'water',
+    'adminuser',
 ]
 
 MIDDLEWARE = [
