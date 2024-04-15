@@ -12,6 +12,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 from namma_panchayat.utils import *
+from adminuser.models import Notification
+
 
 # Create your views here.
 class IndexView(View):
@@ -47,7 +49,9 @@ class IndexView(View):
 
       
         err = request.GET.get("err")
-        return render(request,'index.html',{'has_waste':has_waste,"wallet":wallet,'water_bill':water_bill,'err':err})
+        notis = Notification.objects.all().order_by('-id')
+        return render(request,'index.html',{'has_waste':has_waste,"wallet":wallet,
+                                            'water_bill':water_bill,'err':err,'notis':notis})
 
 
 class MarkWasteView(View):

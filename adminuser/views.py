@@ -7,6 +7,7 @@ from django.utils.decorators import method_decorator
 from accounts.models import *
 from waste.models import *
 from water.models import *
+from .models import *
 
 
 # Create your views here.
@@ -64,3 +65,25 @@ class AdminApproveUserView(View):
         acc.user.is_active= True
         acc.user.save()
         return redirect("/adminuser/users")
+    
+
+
+@method_decorator(login_required,name='dispatch')
+class AdminNotificationView(View):
+    def get(self,request,id=None):
+        if id:
+            Notification.objects.get(id=id).delete()
+            return redirect("/adminuser/notifications")
+
+        notifications = Notification.objects.all().order_by('-id')
+        return render(request,'admin/notifications.html',{'notifications':notifications})
+    
+
+class AdminAddNotificationView(View):
+    def get(self,request):
+        return render(request,'admin/add_notifications.html')
+    
+    def post(self,request):
+        title = request.POST.get("title")
+        Notification.objects.create(title=title)
+        return redirect("/adminuser/notifications")

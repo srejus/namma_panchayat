@@ -17,6 +17,10 @@ class LoginView(View):
             login_text = "Login as Waste Collector"
         elif type_ == 'wtr':
             login_text = "Login as Water Bill Collector"
+        
+        next = request.GET.get("next")
+        if next == '/adminuser/':
+            login_text = "Login as Admin"
 
         return render(request,'login.html',{'err':err,'login_text':login_text})
 
@@ -25,12 +29,13 @@ class LoginView(View):
         password = request.POST.get("password")
 
         type_ = request.GET.get("type","user")
-
+        next = request.GET.get("next")
         
         user = authenticate(request, username=username, password=password)
         if user is not None:
             acc = Account.objects.get(user=user)
-            if type_ == 'user' and acc.user_type != 'USER':
+            
+            if type_ == 'user' and acc.user_type != 'USER' and not next:
                 err = "Invalid USER credentails!"
                 return redirect(f"/accounts/login/?err={err}")
             
@@ -38,13 +43,14 @@ class LoginView(View):
                 err = "Invalid WASTE_COLLECTOR credentails!"
                 return redirect(f"/accounts/login/?err={err}")
             
-        
             if type_ == 'wtr' and acc.user_type != 'WATER_BILL_COLLECTOR':
                 err = "Invalid USER credentails!"
                 return redirect(f"/accounts/login/?err={err}")
             
             
             login(request, user)
+            if next:
+                return redirect(next)
             return redirect("/")
         err = "Invalid credentails!"
         return redirect(f"/accounts/login/?err={err}")
