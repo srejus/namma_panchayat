@@ -15,4 +15,4 @@ class WasteCollection(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.collected_from.full_name)+" - "+str(self.no_of_sacks)
+        return str(self.collected_from)+" - "+str(self.no_of_sacks)
